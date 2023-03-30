@@ -2,13 +2,11 @@ package com.ewok.springbootproject.service.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 
-@Component
 @RequiredArgsConstructor
 @Getter
 public class Streamer implements Serializable {
@@ -22,7 +20,6 @@ public class Streamer implements Serializable {
     private String profile_image_url;
     private String offline_image_url;
     private int view_count;
-    private String email;
     private String created_at;
 
     public Streamer(LinkedHashMap info) {
@@ -35,7 +32,6 @@ public class Streamer implements Serializable {
         this.profile_image_url = (String) info.get("profile_image_url");
         this.offline_image_url = (String) info.get("offline_image_url");
         this.view_count = (int) info.get("view_count");
-        this.email = (String) info.get("email");
         this.created_at = (String) info.get("created_at");
     }
 

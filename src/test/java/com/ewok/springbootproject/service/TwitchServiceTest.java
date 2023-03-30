@@ -1,6 +1,6 @@
 package com.ewok.springbootproject.service;
 
-import com.ewok.springbootproject.domain.TokenRepository;
+import com.ewok.springbootproject.domain.token.TokenRepository;
 import com.ewok.springbootproject.service.dto.Streamer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

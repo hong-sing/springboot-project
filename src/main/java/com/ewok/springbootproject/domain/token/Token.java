@@ -1,4 +1,4 @@
-package com.ewok.springbootproject.domain;
+package com.ewok.springbootproject.domain.token;
 
 import jakarta.persistence.*;
 import lombok.Getter;

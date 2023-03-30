@@ -1,6 +1,6 @@
 package com.ewok.springbootproject.service;
-import com.ewok.springbootproject.domain.Token;
-import com.ewok.springbootproject.domain.TokenRepository;
+import com.ewok.springbootproject.domain.token.Token;
+import com.ewok.springbootproject.domain.token.TokenRepository;
 import com.ewok.springbootproject.service.dto.AccessTokenResponse;
 import com.ewok.springbootproject.service.dto.Streamer;
 import lombok.Getter;
@@ -48,6 +48,7 @@ public class TwitchService {
         return response.getStatusCode() == HttpStatus.OK;
     }
 
+    @Transactional
     public String reGetAccessToken() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -93,7 +94,6 @@ public class TwitchService {
         LinkedHashMap info = (LinkedHashMap) list.get(0);
         Streamer streamer = new Streamer(info);
         return streamer;
-
     }
 
 }

@@ -4,9 +4,6 @@ let index = {
         $('#submitButton').on('click', function () {
             _this.search();
         });
-    },
-    search : function () {
-        window.location.href = '/search';
     }
 }
 

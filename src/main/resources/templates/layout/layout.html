@@ -1,8 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<th:block th:replace="fragments/header :: headerFragment"></th:block>
-<body>
-<th:block layout:fragment="content"></th:block>
-</body>
-<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>트위치</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/js/jquery.min.css}" rel="stylesheet">
+</head>
+
+<!--header.html-->
+<header th:replace="fragments/header::headerFragment"></header>
+
+<!--공통적이지 않은 부분-->
+<body layout:fragment="content"></body>
+
+<!--footer.html-->
+<footer th:replace="fragments/footer::footerFragment"></footer>
 </html>

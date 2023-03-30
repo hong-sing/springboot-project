@@ -1,33 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout">
-<th:block layout:fragment="content">
-    <!-- Icons Grid-->
-    <section class="features-icons bg-light text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-                        <h3>Fully Responsive</h3>
-                        <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-                        <h3>Bootstrap 5 Ready</h3>
-                        <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                        <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                        <h3>Easy to Use</h3>
-                        <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
-                    </div>
-                </div>
-            </div>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.upltraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+<!--<head>-->
+<!--    &lt;!&ndash;개별파일에만 적용되는 head 부분&ndash;&gt;-->
+<!--    &lt;!&ndash;개별 파일에 사용될 css/js가 있다면 선언부 &ndash;&gt;-->
+<!--</head>-->
+
+<!--layout.html에 정의한 content부분-->
+<body layout:fragment="content">
+<div class="p-3">
+    <form class="d-flex" action="/api/v1/search" method="post">
+        <input class="form-control form-control-sm me-2" id="streamer" name="streamer" type="search" placeholder="스트리머 ID를 입력해주세요" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">검색</button>
+    </form>
+</div>
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="display-5 fw-bold text-body-emphasis">Centered hero</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
         </div>
-    </section>
-</th:block>
+    </div>
+</div>
+</body>
 </html>

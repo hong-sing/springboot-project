@@ -19,15 +19,32 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.2.0'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	implementation 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	implementation 'com.h2database:h2'
+
+	implementation "org.mariadb.jdbc:mariadb-java-client"
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+	testImplementation 'org.springframework.security:spring-security-test'
+
+//	@ConfigurationProperties를 사용하기 위한 의존성이다.
+//	클래스에 @ConfigurationProperties를 지정하게 되면 application.properties 파일의 값을 읽어와서 멤버변수에 자동으로 할당한다.
+//	https://velog.io/@bey1548/spring-boot-configuration-processor
+	implementation 'org.springframework.boot:spring-boot-configuration-processor'
+
 }
 
 tasks.named('test') {

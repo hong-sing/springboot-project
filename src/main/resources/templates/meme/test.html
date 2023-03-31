@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitch Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #9146FF;
+            font-family: "Helvetica Neue";
+            color: white;
+        }
+
+        .container-fluid {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .row {
+            display: flex;
+            flex: 1;
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        .sidebar {
+            background-color: white;
+            padding: 20px;
+            margin: 50px;
+            border-radius: 10px;
+        }
+
+        h1, h3 {
+            font-family: "Helvetica Neue Bold";
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+        form {
+            display: inline-block;
+        }
+        input[type="text"] {
+            border: none;
+            padding: 10px;
+            width: 60%;
+            margin-right: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2a65c4;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="content">
+                <h1>Welcome to Twitch Page</h1>
+                <p>This is the main content area</p>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="sidebar">
+                <h3>Popular Streams</h3>
+                <ul>
+                    <li>Stream 1</li>
+                    <li>Stream 2</li>
+                    <li>Stream 3</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Search</h1>
+        <form>
+            <input type="text" name="search" placeholder="Search...">
+            <button type="submit">Go</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

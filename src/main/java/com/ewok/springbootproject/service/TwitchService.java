@@ -1,8 +1,10 @@
 package com.ewok.springbootproject.service;
+import com.ewok.springbootproject.domain.posts.PostsRepository;
 import com.ewok.springbootproject.domain.token.Token;
 import com.ewok.springbootproject.domain.token.TokenRepository;
 import com.ewok.springbootproject.service.dto.AccessTokenResponse;
 import com.ewok.springbootproject.service.dto.Streamer;
+import com.ewok.springbootproject.web.dto.PostSaveRequestDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +23,7 @@ import java.util.LinkedHashMap;
 public class TwitchService {
 
     private final TokenRepository tokenRepository;
+    private final PostsRepository postsRepository;
 
     @Value("${spring.security.oauth2.client.registration.twitch.client-id}")
     private String clientId;

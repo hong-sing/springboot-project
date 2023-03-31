@@ -17,9 +17,6 @@ class TwitchServiceTest {
     private TwitchService twitchService;
 
     @Autowired
-    private Streamer streamer;
-
-    @Autowired
     private TokenRepository tokenRepository;
 
 //    @BeforeEach
@@ -68,6 +65,7 @@ class TwitchServiceTest {
         String login = "zilioner";
 
         //when
+        Streamer streamer = new Streamer();
         streamer = twitchService.getStreamerInfo(login);
 
         //then

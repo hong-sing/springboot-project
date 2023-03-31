@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>트위치</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/js/jquery.min.css}" rel="stylesheet">
+    <link th:href="@{/summernote/summernote-lite.min.css}" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
 </head>
 
 <!--header.html-->
 <header th:replace="fragments/header::headerFragment"></header>
 
-<!--공통적이지 않은 부분-->
+<!--본문 영역(각각의 html)-->
 <body layout:fragment="content"></body>
 
 <!--footer.html-->

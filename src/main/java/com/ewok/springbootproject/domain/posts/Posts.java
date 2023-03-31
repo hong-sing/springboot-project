@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @NoArgsConstructor
@@ -30,7 +31,8 @@ public class Posts extends BaseTimeEntity {
     @Column
     private String author;
 
-    @Column(columnDefinition = "int default 0")
+    @Column
+    @ColumnDefault("0")
     private int good;
 
     @Column

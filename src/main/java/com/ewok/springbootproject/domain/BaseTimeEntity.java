@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)  // Auditing을 사용하려면 application클래스(시작클래스)에 @EnableJpaAuditing를 추가해야함
 public abstract class BaseTimeEntity {
 
     @CreatedDate    // Entity가 생성되어 저장될 때 시간이 자동 저장

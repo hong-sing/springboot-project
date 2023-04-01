@@ -27,6 +27,12 @@ public class TwitchController {
         return "meme/post";
     }
 
+    @GetMapping("/post/detail/{id}")
+    public String detail(Model model, @PathVariable Long id) {
+        model.addAttribute("post", postsService.findById(id));
+        return "meme/post-detail";
+    }
+
     @GetMapping("/post/update/{id}")
     public String update(Model model, @PathVariable Long id) {
         model.addAttribute("post", postsService.findById(id));

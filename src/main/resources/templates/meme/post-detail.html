@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/layout">
+<th:block layout:fragment="content">
+    <div class="container py-5 my-5">
+        <div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="author" name="author" th:value="${post.getAuthor()}" readonly>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="meme" name="meme" th:value="${post.getMeme()}" readonly>
+            </div>
+            <div class="mb-3">
+                <textarea id="summary" class="form-control" th:text="${post.getSummary()}" readonly></textarea>
+            </div>
+            <div class="mb-3" id="description" name="description" th:utext="${post.getDescription()}">
+<!--                <p id="description" name="description" th:utext="${post.getDescription()}"></p>-->
+            </div>
+            <br>
+            <input type="hidden" id="login" name="login" th:value="${post.getLogin()}">
+            <input type="hidden" id="id" name="id" th:value="${post.getId()}">
+            <!-- 수정. 삭제는 게시글 작성자만 보이게 하기(미구현) -->
+            <button type="submit" class="btn btn-bd-purple ml-auto" id="update">수정</button>
+            <button type="submit" class="btn btn-bd-purple ml-auto" id="delete">삭제</button>
+        </div>
+    </div>
+
+    <script src="/js/post.js"></script>
+</th:block>
+</html>

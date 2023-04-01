@@ -26,7 +26,7 @@ let index = {
     },
     search : function () {
         let streamer = $('#streamer').val();
-        let url = '/api/v1/search/' + streamer;
+        let url = '/search/' + streamer;
         window.location.href = url;
     },
 

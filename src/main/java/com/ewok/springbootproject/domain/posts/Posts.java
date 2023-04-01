@@ -48,4 +48,12 @@ public class Posts extends BaseTimeEntity {
         this.login = login;
         this.good = good;
     }
+
+    public void update(String meme, String summary, String description, String reference, String author) {
+        this.meme = meme;
+        this.summary = summary;
+        this.description = description;
+        this.reference = reference;
+        this.author = author;
+    }
 }

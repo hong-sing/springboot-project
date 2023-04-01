@@ -14,17 +14,25 @@ public class TwitchController {
     private final TwitchService twitchService;
     private final PostsService postsService;
 
-    @GetMapping("/api/v1/search/{streamer}")
+    @GetMapping("/post/save/{login}")
+    public String postsSave(Model model, @PathVariable String login) {
+        model.addAttribute("login", login);
+        return "meme/post-save";
+    }
+
+    @GetMapping("/search/{streamer}")
     public String search(Model model, @PathVariable String streamer) {
-        System.out.println(streamer);
         model.addAttribute("streamer", twitchService.getStreamerInfo(streamer));
         model.addAttribute("posts", postsService.findByLoginGoodDesc(streamer));
         return "meme/post";
     }
 
+    @GetMapping("/post/update/{id}")
+    public String update(Model model, @PathVariable Long id) {
+        model.addAttribute("post", postsService.findById(id));
+        return "meme/post-update";
+    }
+
 }
 
 
-/*
-uri를 /api/v1 처럼 짓는 이유 : https://velog.io/@j3ss83/API-url%EC%97%90-apiv1%EB%A5%BC-%EB%B6%99%EC%9D%B4%EB%8A%94-%EC%9D%B4%EC%9C%A0
- */

@@ -1,9 +1,12 @@
-let post_save = {
+let post = {
     init : function () {
         let _this = this;
         $('#write').on('click', function () {
             _this.save();
         });
+        $('#update').on('click', function () {
+            _this.update();
+        })
     },
     save : function () {
         let description = $('#summernote').summernote('code');
@@ -32,8 +35,41 @@ let post_save = {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function () {
-            alert('성공');
-            window.location.href = '/api/v1/search/' + login;
+            alert('밈이 등록되었습니다.');
+            window.location.href = '/search/' + login;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    update : function () {
+        let description = $('#summernote').summernote('code');
+        let youtubeIframe = $(description).find('iframe[src*=youtube]');
+        let reference = null;
+        let login = $('#login').val();
+        let id = $('#id').val();
+
+        if (youtubeIframe.length > 0) {
+            reference = youtubeIframe.attr('src').replace('//www.youtube.com/embed/', 'https://www.youtube.com/watch?v=');
+        }
+
+        let data = {
+            author: $('#author').val(),
+            meme: $('#meme').val(),
+            summary: $('#summary').val(),
+            description: description,
+            reference: reference,
+            login: login,
+        };
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/update/' + id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function () {
+            alert('밈이 수정되었습니다.');
+            window.location.href = '/search/' + login;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -75,5 +111,5 @@ $(document).ready(function () {
     });
 });
 
-post_save.init();
+post.init();
 

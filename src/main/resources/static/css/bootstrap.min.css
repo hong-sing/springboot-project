@@ -25,4 +25,8 @@
     /*text-overflow: ellipsis;*/
     /*white-space: nowrap;*/
 }
+.a-post-update {
+    text-decoration: none;
+    color: inherit;
+}
 /*# sourceMappingURL=bootstrap.min.css.map */

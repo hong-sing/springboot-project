@@ -14,27 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-    private final TokenRepository tokenRepository;
-    private final TwitchService twitchService;
+//    private final TokenRepository tokenRepository;
 
     @GetMapping("/")
     public String index(Model model) {
         return "index";
     }
 
-    @PostMapping("/search")
-    public String search(Model model, String streamer) {
-        System.out.println(streamer);
-        model.addAttribute("streamer", twitchService.getStreamerInfo(streamer));
-        return "meme/post";
-    }
 
-    @GetMapping("/post/save/{login}")
-    public String postsSave(Model model, @PathVariable String login) {
-        System.out.println(login);
-        model.addAttribute("login", login);
-        return "meme/post-save";
-    }
 
 //    @GetMapping("/token")
 //    public String token() {

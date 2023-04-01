@@ -6,7 +6,10 @@ let post = {
         });
         $('#update').on('click', function () {
             _this.update();
-        })
+        });
+        $('#delete').on('click', function () {
+            _this.delete();
+        });
     },
     save : function () {
         let description = $('#summernote').summernote('code');
@@ -69,6 +72,22 @@ let post = {
             data: JSON.stringify(data)
         }).done(function () {
             alert('밈이 수정되었습니다.');
+            window.location.href = '/search/' + login;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    delete : function () {
+        let id = $('#id').val();
+        let login = $('#login').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/delete/' + id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function () {
+            alert("밈이 삭제되었습니다.");
             window.location.href = '/search/' + login;
         }).fail(function (error) {
             alert(JSON.stringify(error));

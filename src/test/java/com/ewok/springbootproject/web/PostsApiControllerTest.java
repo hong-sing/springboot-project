@@ -4,7 +4,6 @@ import com.ewok.springbootproject.domain.posts.Posts;
 import com.ewok.springbootproject.domain.posts.PostsRepository;
 import com.ewok.springbootproject.web.dto.PostSaveRequestDto;
 import com.ewok.springbootproject.web.dto.PostsUpdateRequestDto;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,8 +24,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Transactional
@@ -108,7 +106,7 @@ class PostsApiControllerTest {
                 .reference(expectedReference)
                 .build();
 
-        String url = "http://localhost" + port + "/api/v1/update/" + updateId;
+        String url = "http://localhost:" + port + "/api/v1/update/" + updateId;
 
         //when
         mvc.perform(put(url)
@@ -121,5 +119,31 @@ class PostsApiControllerTest {
         assertThat(posts.get().getMeme()).isEqualTo(expectedMeme);
         assertThat(posts.get().getDescription()).isEqualTo(expectedDescription);
         assertThat(posts.get().getReference()).isEqualTo(expectedReference);
+    }
+
+    @Test
+    void 밈_삭제된다() throws Exception {
+        //given
+        Posts savedPosts = postsRepository.save(Posts.builder()
+                .author("침튜브")
+                .meme("55도발")
+                .summary("55도발 왜하냐고")
+                .description("55도발 왜하냐고는 ....")
+                .reference("http://www.youtube.com/wa...")
+                .login("zilioner")
+                .build());
+
+        Long deleteId = savedPosts.getId();
+
+        String url = "http://localhost:" + port + "/api/v1/delete/" + deleteId;
+
+        //when
+        mvc.perform(delete(url)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        //then
+        Optional<Posts> posts = postsRepository.findById(deleteId);
+        assertThat(posts).isEmpty();
     }
 }

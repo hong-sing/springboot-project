@@ -9,6 +9,7 @@ let post_save = {
         let description = $('#summernote').summernote('code');
         let youtubeIframe = $(description).find('iframe[src*=youtube]');
         let reference = null;
+        let login = $('#login').val();
         if (youtubeIframe.length > 0) {
             reference = youtubeIframe.attr('src').replace('//www.youtube.com/embed/', 'https://www.youtube.com/watch?v=');
             console.log(reference);
@@ -21,7 +22,7 @@ let post_save = {
             summary: $('#summary').val(),
             description: description,
             reference: reference,
-            login: $('#login').val()
+            login: login
         };
 
         $.ajax({
@@ -32,7 +33,7 @@ let post_save = {
             data: JSON.stringify(data)
         }).done(function () {
             alert('성공');
-            window.location.href = '/api/v1/search';
+            window.location.href = '/api/v1/search/' + login;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

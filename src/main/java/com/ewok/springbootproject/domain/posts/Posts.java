@@ -39,12 +39,13 @@ public class Posts extends BaseTimeEntity {
     private String login;
 
     @Builder
-    public Posts(String meme, String summary, String description, String reference, String author, String login) {
+    public Posts(String meme, String summary, String description, String reference, String author, String login, int good) {
         this.meme = meme;
         this.summary = summary;
         this.description = description;
         this.reference = reference;
         this.author = author;
         this.login = login;
+        this.good = good;
     }
 }

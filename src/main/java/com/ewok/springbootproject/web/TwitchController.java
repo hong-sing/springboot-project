@@ -1,25 +1,24 @@
 package com.ewok.springbootproject.web;
 
+import com.ewok.springbootproject.service.PostsService;
 import com.ewok.springbootproject.service.TwitchService;
-import com.ewok.springbootproject.web.dto.PostSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
 public class TwitchController {
 
     private final TwitchService twitchService;
+    private final PostsService postsService;
 
-    @PostMapping("/api/v1/search")
-    public String search(Model model, String streamer) {
+    @GetMapping("/api/v1/search/{streamer}")
+    public String search(Model model, @PathVariable String streamer) {
         System.out.println(streamer);
         model.addAttribute("streamer", twitchService.getStreamerInfo(streamer));
+        model.addAttribute("posts", postsService.findByLoginGoodDesc(streamer));
         return "meme/post";
     }
 

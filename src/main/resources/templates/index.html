@@ -8,10 +8,10 @@
 <!--layout.html에 정의한 content부분-->
 <body layout:fragment="content">
 <div class="p-3">
-    <form class="d-flex" action="/api/v1/search" method="post">
+    <div class="d-flex">
         <input class="form-control form-control-sm me-2" id="streamer" name="streamer" type="search" placeholder="스트리머 ID를 입력해주세요" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">검색</button>
-    </form>
+        <button class="btn btn-outline-success" id="searchButton" type="button">검색</button>
+    </div>
 </div>
 <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">

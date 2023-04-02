@@ -2,8 +2,8 @@ package com.ewok.springbootproject.config.auth;
 
 import com.ewok.springbootproject.config.auth.dto.OAuthAttributes;
 import com.ewok.springbootproject.config.auth.dto.SessionUser;
-import com.ewok.springbootproject.domain.user.User;
-import com.ewok.springbootproject.domain.user.UserRepository;
+import com.ewok.springbootproject.domain.user.Member;
+import com.ewok.springbootproject.domain.user.MemberRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,7 +22,7 @@ import java.util.Collections;
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
     private final HttpSession httpSession;
 
     @Override
@@ -34,17 +34,17 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
-        User user = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new SessionUser(user));
+        Member member = saveOrUpdate(attributes);
+        httpSession.setAttribute("user", new SessionUser(member));
 
-        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())), attributes.getAttributes(), attributes.getNameAttributeKey());
+        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(member.getRoleKey())), attributes.getAttributes(), attributes.getNameAttributeKey());
     }
 
-    private User saveOrUpdate(OAuthAttributes attributes) {
-        User user = userRepository.findByEmail(attributes.getEmail())
+    private Member saveOrUpdate(OAuthAttributes attributes) {
+        Member member = memberRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
                 .orElse(attributes.toEntity());
 
-        return userRepository.save(user);
+        return memberRepository.save(member);
     }
 }

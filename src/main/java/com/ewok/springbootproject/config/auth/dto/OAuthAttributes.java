@@ -1,7 +1,7 @@
 package com.ewok.springbootproject.config.auth.dto;
 
 import com.ewok.springbootproject.domain.user.Role;
-import com.ewok.springbootproject.domain.user.User;
+import com.ewok.springbootproject.domain.user.Member;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -39,8 +39,8 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public User toEntity() {
-        return User.builder()
+    public Member toEntity() {
+        return Member.builder()
                 .name(name)
                 .email(email)
                 .picture(picture)

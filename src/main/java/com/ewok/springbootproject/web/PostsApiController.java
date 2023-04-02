@@ -1,9 +1,12 @@
 package com.ewok.springbootproject.web;
 
+import com.ewok.springbootproject.config.auth.LoginUser;
+import com.ewok.springbootproject.config.auth.dto.SessionUser;
 import com.ewok.springbootproject.service.PostsService;
 import com.ewok.springbootproject.web.dto.PostSaveRequestDto;
 import com.ewok.springbootproject.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -13,17 +16,26 @@ public class PostsApiController {
     private final PostsService postsService;
 
     @PostMapping("/api/v1/save")
-    public Long save(@RequestBody PostSaveRequestDto requestDto) {
+    public Long save(Model model, @RequestBody PostSaveRequestDto requestDto, @LoginUser SessionUser user) {
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         return postsService.save(requestDto);
     }
 
     @PutMapping("/api/v1/update/{id}")
-    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
+    public Long update(Model model, @PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto, @LoginUser SessionUser user) {
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         return postsService.update(id, requestDto);
     }
 
     @DeleteMapping("/api/v1/delete/{id}")
-    public Long delete(@PathVariable Long id) {
+    public Long delete(Model model, @PathVariable Long id, @LoginUser SessionUser user) {
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         postsService.delete(id);
         return id;
     }

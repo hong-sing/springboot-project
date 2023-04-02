@@ -10,6 +10,13 @@ let post = {
         $('#delete').on('click', function () {
             _this.delete();
         });
+        $('#updateForm').on('click', function () {
+            _this.updateForm();
+        })
+    },
+    updateForm : function () {
+        let id = $('#id').val();
+        window.location.href = '/post/update/' + id;
     },
     save : function () {
         let description = $('#summernote').summernote('code');
@@ -18,9 +25,7 @@ let post = {
         let login = $('#login').val();
         if (youtubeIframe.length > 0) {
             reference = youtubeIframe.attr('src').replace('//www.youtube.com/embed/', 'https://www.youtube.com/watch?v=');
-            console.log(reference);
         }
-        console.log(description);
 
         let data = {
             author: $('#author').val(),

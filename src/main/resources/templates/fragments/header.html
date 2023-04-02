@@ -26,7 +26,9 @@
                 </form>
 
                 <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    <span th:if="${userName!=null}" th:text="${userName}"></span>
+                    <a th:if="${userName==null}" type="button" class="btn btn-outline-light me-2" href="/loginForm">Login</a>
+                    <a th:unless="${userName==null}" type="button" class="btn btn-outline-light me-2" href="/logout">Logout</a>
                     <button type="button" class="btn btn-warning">Sign-up</button>
                 </div>
             </div>

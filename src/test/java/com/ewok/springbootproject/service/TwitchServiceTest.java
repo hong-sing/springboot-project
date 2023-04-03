@@ -1,12 +1,20 @@
 package com.ewok.springbootproject.service;
 
 import com.ewok.springbootproject.domain.token.TokenRepository;
+import com.ewok.springbootproject.service.dto.StreamInfo;
+import com.ewok.springbootproject.service.dto.StreamInfoData;
 import com.ewok.springbootproject.service.dto.Streamer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -71,6 +79,19 @@ class TwitchServiceTest {
 
         //then
         assertThat(streamer.getDisplay_name()).isEqualTo("침착맨");
+    }
+
+    @Test
+    @DisplayName("스트림_정보_가져오기")
+    void getStreamInfo() {
+        //given
+        String language = "ko";
+
+        //when
+        List<StreamInfoData> list = twitchService.getStreamInfo(language);
+
+        //then
+        System.out.println(list);
     }
 
 }

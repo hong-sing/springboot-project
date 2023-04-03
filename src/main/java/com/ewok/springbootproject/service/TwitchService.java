@@ -3,8 +3,9 @@ import com.ewok.springbootproject.domain.posts.PostsRepository;
 import com.ewok.springbootproject.domain.token.Token;
 import com.ewok.springbootproject.domain.token.TokenRepository;
 import com.ewok.springbootproject.service.dto.AccessTokenResponse;
+import com.ewok.springbootproject.service.dto.StreamInfo;
+import com.ewok.springbootproject.service.dto.StreamInfoData;
 import com.ewok.springbootproject.service.dto.Streamer;
-import com.ewok.springbootproject.web.dto.PostSaveRequestDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +17,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
@@ -113,6 +116,44 @@ public class TwitchService {
         Streamer streamer = new Streamer(info);
         return streamer;
     }
+
+    public List<StreamInfoData> getStreamInfo(String language) {
+        // 토큰이 유효하지 않다면 재발급
+        String token = getAccessToken();
+        if (!isAccessTokenValid(token)) {
+            token = reGetAccessToken();
+        }
+
+        // 정보 요청
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        headers.set("Client-Id", clientId);
+        headers.setBearerAuth(token);
+        HttpEntity<?> httpEntity = new HttpEntity<>(headers);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://api.twitch.tv/helix/streams")
+                .queryParam("language", language);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<LinkedHashMap> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, httpEntity, LinkedHashMap.class);
+        LinkedHashMap data = response.getBody();
+//        ArrayList list = (ArrayList) data.get("data");
+//        LinkedHashMap info = (LinkedHashMap) list.get(0);
+        StreamInfo streamInfo = new StreamInfo(data);
+        List<StreamInfoData> infoData = streamInfoToStreamInfoData(streamInfo);
+        return infoData;
+    }
+
+    public List<StreamInfoData> streamInfoToStreamInfoData(StreamInfo streamInfo) {
+        List<StreamInfoData> list = new ArrayList<>();
+        int size = streamInfo.getData().size();
+        for (int i = 0; i < size; i++) {
+            ArrayList arrayList = streamInfo.getData();
+            LinkedHashMap map = (LinkedHashMap) arrayList.get(i);
+            StreamInfoData infoData = new StreamInfoData(map);
+            list.add(infoData);
+        }
+        return list;
+    }
+
 
 }
 

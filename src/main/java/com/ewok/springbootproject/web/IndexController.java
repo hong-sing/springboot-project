@@ -19,6 +19,7 @@ public class IndexController {
 
 //    private final TokenRepository tokenRepository;
     private final HttpSession httpSession;
+    private final TwitchService twitchService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
@@ -26,6 +27,7 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
+        model.addAttribute("streamInfoData", twitchService.getStreamInfo("ko"));
         return "index";
     }
 

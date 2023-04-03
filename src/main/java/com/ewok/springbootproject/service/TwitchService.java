@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -43,12 +44,26 @@ public class TwitchService {
         headers.setBearerAuth(accessToken);
         HttpEntity<?> entity = new HttpEntity<>(headers);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.exchange(
-                "https://id.twitch.tv/oauth2/validate",
-                HttpMethod.GET,
-                entity,
-                String.class);
-        return response.getStatusCode() == HttpStatus.OK;
+//        ResponseEntity<String> response = restTemplate.exchange(
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    "https://id.twitch.tv/oauth2/validate",
+                    HttpMethod.GET,
+                    entity,
+                    String.class);
+            if (response.getStatusCode() == HttpStatus.OK) {
+                return true;
+            } else {
+                throw new RuntimeException("Unexpected response from Twitch API");
+            }
+        } catch (HttpClientErrorException e) {
+            if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+                return false;
+            } else {
+                throw new RuntimeException("Unexpected error from Twitch API", e);
+            }
+        }
+//        return response.getStatusCode() == HttpStatus.OK;
     }
 
     @Transactional

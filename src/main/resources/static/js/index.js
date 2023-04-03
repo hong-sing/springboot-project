@@ -26,9 +26,18 @@ let index = {
     },
     search : function () {
         let streamer = $('#streamer').val();
-        let url = '/search/' + streamer;
-        window.location.href = url;
-    },
+        // window.location.href = '/search/' + streamer;
+
+        $.ajax({
+            type: 'GET',
+            url: '/search/' + streamer,
+        }).done(function () {
+            window.location.href = '/search/' + streamer;
+        }).fail(function (error) {
+            alert('스트리머 ID를 다시 확인해주세요');
+            // console.log(error);
+        });
+    }
 
 }
 

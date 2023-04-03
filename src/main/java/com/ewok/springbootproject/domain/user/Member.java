@@ -28,12 +28,16 @@ public class Member extends BaseTimeEntity {
     @Column
     private Role role;
 
+    @Column
+    private String sub;
+
     @Builder
-    public Member(String name, String email, String picture, Role role) {
+    public Member(String name, String email, String picture, Role role, String sub) {
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
+        this.sub = sub;
     }
 
     public Member update(String name, String picture) {

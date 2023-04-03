@@ -8,7 +8,9 @@
             <p class="lead mb-4" th:text="${streamer.getDescription()}"></p>
         </div>
         <div class="d-flex justify-content-end mb-3">
-            <a type="button" class="btn btn-bd-purple ml-auto" th:href="@{/post/save/{login}(login=${streamer.getLogin()})}">밈 등록</a>
+            <input type="hidden" id="isLogin" th:value="${userName}">
+            <input type="hidden" id="streamerLogin" th:value="${streamer.getLogin()}">
+            <a type="button" class="btn btn-bd-purple ml-auto" id="saveMeme">밈 등록</a>
         </div>
         <table class="table">
             <thead>

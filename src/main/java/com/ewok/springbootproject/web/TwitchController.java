@@ -20,6 +20,7 @@ public class TwitchController {
     public String postsSave(Model model, @PathVariable String login, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("sub", user.getSub());
         }
         model.addAttribute("login", login);
         return "meme/post-save";
@@ -39,6 +40,7 @@ public class TwitchController {
     public String detail(Model model, @PathVariable Long id, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("userName", user.getName());
+            model.addAttribute("sub", user.getSub());
         }
         model.addAttribute("post", postsService.findById(id));
         return "meme/post-detail";

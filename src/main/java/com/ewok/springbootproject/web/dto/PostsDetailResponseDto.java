@@ -12,6 +12,7 @@ public class PostsDetailResponseDto {
     private String summary;
     private String description;
     private String login;
+    private String sub;
 
     public PostsDetailResponseDto(Posts entity) {
         this.id = entity.getId();
@@ -20,5 +21,6 @@ public class PostsDetailResponseDto {
         this.summary = entity.getSummary();
         this.description = entity.getDescription();
         this.login = entity.getLogin();
+        this.sub = entity.getSub();
     }
 }

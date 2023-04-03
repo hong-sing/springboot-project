@@ -12,7 +12,19 @@ let post = {
         });
         $('#updateForm').on('click', function () {
             _this.updateForm();
+        });
+        $('#saveMeme').on('click', function () {
+            _this.goToMemeSavePage();
         })
+    },
+    goToMemeSavePage : function () {
+        let isLogin = $('#isLogin').val();
+        let login = $('#streamerLogin').val();
+        if (isLogin != "") {
+            window.location.href = '/post/save/' + login;
+        } else {
+            alert('로그인 후 이용해주세요');
+        }
     },
     updateForm : function () {
         let id = $('#id').val();
@@ -33,7 +45,8 @@ let post = {
             summary: $('#summary').val(),
             description: description,
             reference: reference,
-            login: login
+            login: login,
+            sub: $('#sub').val()
         };
 
         $.ajax({

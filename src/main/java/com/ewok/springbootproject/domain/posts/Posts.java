@@ -1,6 +1,7 @@
 package com.ewok.springbootproject.domain.posts;
 
 import com.ewok.springbootproject.domain.BaseTimeEntity;
+import com.ewok.springbootproject.domain.user.Member;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,8 +39,10 @@ public class Posts extends BaseTimeEntity {
     @Column
     private String login;
 
+    private String sub;
+
     @Builder
-    public Posts(String meme, String summary, String description, String reference, String author, String login, int good) {
+    public Posts(String meme, String summary, String description, String reference, String author, String login, int good, String sub) {
         this.meme = meme;
         this.summary = summary;
         this.description = description;
@@ -47,6 +50,7 @@ public class Posts extends BaseTimeEntity {
         this.author = author;
         this.login = login;
         this.good = good;
+        this.sub = sub;
     }
 
     public void update(String meme, String summary, String description, String reference, String author) {

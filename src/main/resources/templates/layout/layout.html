@@ -9,11 +9,11 @@
 </head>
 
 <!--header.html-->
-<header th:replace="fragments/header::headerFragment"></header>
+<header th:replace="~{fragments/header::headerFragment}"></header>
 
 <!--본문 영역(각각의 html)-->
 <body layout:fragment="content"></body>
 
 <!--footer.html-->
-<footer th:replace="fragments/footer::footerFragment"></footer>
+<footer th:replace="~{fragments/footer::footerFragment}"></footer>
 </html>

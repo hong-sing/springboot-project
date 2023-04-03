@@ -28,7 +28,6 @@ public class OAuthAttributes {
     }
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
-        System.out.println("attributes : " + attributes);
         if ("twitch".equals(registrationId)) {
             return ofTwitch(userNameAttributeName, attributes);
         }

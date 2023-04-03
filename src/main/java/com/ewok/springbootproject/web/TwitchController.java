@@ -5,6 +5,8 @@ import com.ewok.springbootproject.config.auth.dto.SessionUser;
 import com.ewok.springbootproject.service.PostsService;
 import com.ewok.springbootproject.service.TwitchService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +29,28 @@ public class TwitchController {
     }
 
     @GetMapping("/search/{streamer}")
-    public String search(Model model, @PathVariable String streamer, @LoginUser SessionUser user) {
+    public String search(Model model, @PathVariable String streamer, @LoginUser SessionUser user, @PageableDefault(size = 15) Pageable pageable, @RequestParam(required = false, defaultValue = "0", value = "page") int pageNo) {
+        System.out.println(pageNo);
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
         model.addAttribute("streamer", twitchService.getStreamerInfo(streamer));
-        model.addAttribute("posts", postsService.findByLoginGoodDesc(streamer));
+        model.addAttribute("posts", postsService.findByLoginGoodDesc2(streamer, pageable).getBody());
+        model.addAttribute("pageNo", pageNo);
+
         return "meme/post";
     }
+
+//    @GetMapping("/search/{streamer}")
+//    public String search(Model model, @PathVariable String streamer, @LoginUser SessionUser user, @PageableDefault(size = 15) Pageable pageable) {
+//        if (user != null) {
+//            model.addAttribute("userName", user.getName());
+//        }
+//        model.addAttribute("streamer", twitchService.getStreamerInfo(streamer));
+//        model.addAttribute("posts", postsService.findByLoginGoodDesc2(streamer, pageable).getBody());
+//
+//        return "meme/post";
+//    }
 
     @GetMapping("/post/detail/{id}")
     public String detail(Model model, @PathVariable Long id, @LoginUser SessionUser user) {

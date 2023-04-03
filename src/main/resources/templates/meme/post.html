@@ -19,12 +19,13 @@
                 <th scope="col">설명</th>
                 <th scope="col">비고</th>
                 <th scope="col">작성자</th>
-                <th scope="col">추천</th>
+                <!--  추후 구현-->
+<!--                <th scope="col">추천</th>-->
                 <th scope="col">최종수정일</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="list : ${posts}">
+            <tr th:each="list : ${posts.getPostsList()}">
                 <th scope="row"><a class="a-post-update" th:href="@{/post/detail/{id}(id=${list.getId()})}" th:text="${list.getMeme()}"></a></th>
                 <td class="table-description"><a class="a-post-update" th:href="@{/post/detail/{id}(id=${list.getId()})}"  th:text="${list.getSummary()}"></a></td>
                 <td th:if="${list.getReference()!=null}"><a th:href="${list.getReference()}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#dc3545" class="bi bi-youtube btn-outline-danger" viewBox="0 0 16 16">
@@ -32,11 +33,38 @@
                 </svg></a></td>
                 <td th:unless="${list.getReference()!=null}"></td>
                 <td th:text="${list.getAuthor()}"></td>
-                <td th:text="${list.getGood()}"></td>
+                <!-- 추후 구현-->
+<!--                <td th:text="${list.getGood()}"></td>-->
                 <td th:text="${#temporals.format(list.getModifiedDate(), 'yyyy년 MM월 dd일')}"></td>
             </tr>
             </tbody>
         </table>
+        <nav aria-label="Page navigation example" class="justify-content-center">
+            <th:block th:with="start=${T(java.lang.Math).floor(pageNo/10)*10 + 1}, totalPage=${posts.getTotalPage()}">
+                <th:block th:with="last=${start+9<totalPage?start+9:totalPage}">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:unless="${pageNo &lt; 10}">
+                            <a class="page-link" th:href="@{/search/{streamer}(streamer=${streamer.getLogin()}, page=${start.intValue()-11})}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+        <!--                <li th:each="page : ${page}" class="page-item"><a class="page-link" href="#" th:text="${page.getTotalPage()}">1</a></li>-->
+    <!--                    <th:block th:with="totalPage=${posts.getTotalPage()}">-->
+                            <th:block th:each="i : ${#numbers.sequence(start, last)}">
+                                <li class="page-item active" th:if="${pageNo==i-1}"><a class="page-link" th:href="@{/search/{streamer}(streamer=${streamer.getLogin()}, page=${i-1})}" th:text="${i}">1</a></li>
+                                <li class="page-item" th:unless="${pageNo==i-1}"><a class="page-link" th:href="@{/search/{streamer}(streamer=${streamer.getLogin()}, page=${i-1})}" th:text="${i}">1</a></li>
+            <!--                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+                            </th:block>
+    <!--                    </th:block>-->
+                        <li class="page-item" th:if="${last < totalPage}">
+                            <a class="page-link" th:href="@{/search/{streamer}(streamer=${streamer.getLogin()}, page=${start.intValue()+9})}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </th:block>
+            </th:block>
+        </nav>
     </div>
 </th:block>
 </html>

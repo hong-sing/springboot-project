@@ -5,6 +5,7 @@ import com.ewok.springbootproject.domain.posts.PostsRepository;
 import com.ewok.springbootproject.web.dto.PostSaveRequestDto;
 import com.ewok.springbootproject.web.dto.PostsUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Transactional
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PostsApiControllerTest {
@@ -48,6 +48,11 @@ class PostsApiControllerTest {
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .build();
+    }
+
+    @AfterEach
+    public void tearDown() throws Exception {
+        postsRepository.deleteAll();
     }
 
     @Test

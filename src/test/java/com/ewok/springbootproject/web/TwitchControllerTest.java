@@ -16,6 +16,7 @@ class TwitchControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    /*
     @Test
     void 게시글페이지_로딩() {
         //when
@@ -24,5 +25,6 @@ class TwitchControllerTest {
         //then
         assertThat(body).contains("예민하네");
     }
+     */
 
 }

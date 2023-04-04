@@ -83,9 +83,9 @@ class PostsApiControllerTest {
 
         //then
         List<Posts> all = postsRepository.findAll();
-        assertThat(all.get(2).getMeme()).isEqualTo(meme);
-        assertThat(all.get(2).getDescription()).isEqualTo(description);
-        assertThat(all.get(2).getReference()).isEqualTo(reference);
+        assertThat(all.get(0).getMeme()).isEqualTo(meme);
+        assertThat(all.get(0).getDescription()).isEqualTo(description);
+        assertThat(all.get(0).getReference()).isEqualTo(reference);
     }
 
     @Test

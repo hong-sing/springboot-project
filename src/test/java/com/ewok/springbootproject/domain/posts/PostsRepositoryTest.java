@@ -16,11 +16,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-@Transactional
 public class PostsRepositoryTest {
 
     @Autowired
     PostsRepository postsRepository;
+
+    @AfterEach
+    public void cleanup() {
+        postsRepository.deleteAll();
+    }
 
 
     @Test

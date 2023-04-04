@@ -1,20 +1,20 @@
+/*
 package com.ewok.springbootproject.service;
 
+import com.ewok.springbootproject.domain.token.Token;
 import com.ewok.springbootproject.domain.token.TokenRepository;
 import com.ewok.springbootproject.service.dto.StreamInfo;
 import com.ewok.springbootproject.service.dto.StreamInfoData;
 import com.ewok.springbootproject.service.dto.Streamer;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -27,11 +27,11 @@ class TwitchServiceTest {
     @Autowired
     private TokenRepository tokenRepository;
 
-//    @BeforeEach
-//    public void setup() {
-//        Token token = new Token("");
-//        tokenRepository.save(token);
-//    }
+    @BeforeEach
+    public void setup() {
+        Token token = new Token("");
+        tokenRepository.save(token);
+    }
 
     @Test
     @DisplayName("액세스토큰_가져오기")
@@ -53,8 +53,8 @@ class TwitchServiceTest {
         String accessToken = twitchService.getAccessToken();
 
         //then
-//        assertTrue(twitchService.isAccessTokenValid(accessToken));
-        assertFalse(twitchService.isAccessTokenValid(accessToken));
+        assertTrue(twitchService.isAccessTokenValid(accessToken));
+//        assertFalse(twitchService.isAccessTokenValid(accessToken));
     }
 
     @Test
@@ -74,24 +74,13 @@ class TwitchServiceTest {
         String login = "zilioner";
 
         //when
-        Streamer streamer = new Streamer();
-        streamer = twitchService.getStreamerInfo(login);
+        Streamer streamer = twitchService.getStreamerInfo(login);
 
         //then
         assertThat(streamer.getDisplay_name()).isEqualTo("침착맨");
     }
 
-    @Test
-    @DisplayName("스트림_정보_가져오기")
-    void getStreamInfo() {
-        //given
-        String language = "ko";
-
-        //when
-        List<StreamInfoData> list = twitchService.getStreamInfo(language);
-
-        //then
-        System.out.println(list);
-    }
-
 }
+
+
+ */

@@ -87,17 +87,17 @@ public class PostsRepositoryTest {
                 .build());
 
         //when
-//        List<Posts> postsList = postsRepository.findByLoginGoodDesc(login);
-//
-//        //then
-//        Posts posts = postsList.get(0);
-//        assertThat(posts.getMeme()).isEqualTo(meme);
-//        assertThat(posts.getAuthor()).isEqualTo(author);
-//        assertThat(posts.getDescription()).isEqualTo(description);
-//        assertThat(posts.getReference()).isEqualTo(reference);
-//        assertThat(posts.getSummary()).isEqualTo(summary);
-//        assertThat(posts.getLogin()).isEqualTo(login);
-//        assertThat(posts.getGood()).isEqualTo(good);
+        List<Posts> postsList = postsRepository.findByLoginGoodDesc(login);
+
+        //then
+        Posts posts = postsList.get(0);
+        assertThat(posts.getMeme()).isEqualTo(meme);
+        assertThat(posts.getAuthor()).isEqualTo(author);
+        assertThat(posts.getDescription()).isEqualTo(description);
+        assertThat(posts.getReference()).isEqualTo(reference);
+        assertThat(posts.getSummary()).isEqualTo(summary);
+        assertThat(posts.getLogin()).isEqualTo(login);
+        assertThat(posts.getGood()).isEqualTo(good);
     }
 
     @Test

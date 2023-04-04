@@ -8,7 +8,9 @@ let post = {
             _this.update();
         });
         $('#delete').on('click', function () {
-            _this.delete();
+            if (confirm('정말 삭제하시겠습니까?')) {
+                _this.delete();
+            }
         });
         $('#updateForm').on('click', function () {
             _this.updateForm();
@@ -105,7 +107,7 @@ let post = {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function () {
-            alert("밈이 삭제되었습니다.");
+            alert('밈이 삭제되었습니다.');
             window.location.href = '/search/' + login;
         }).fail(function (error) {
             alert(JSON.stringify(error));

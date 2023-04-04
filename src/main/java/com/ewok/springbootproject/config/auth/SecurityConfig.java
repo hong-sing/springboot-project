@@ -20,7 +20,7 @@ public class SecurityConfig {
         http.csrf().disable().headers().frameOptions().disable()
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/**").hasRole(Role.USER.name())
+                .requestMatchers("/api/v1/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                 .requestMatchers("/h2-consol/**").permitAll()
                 .anyRequest().permitAll()
                 .and()

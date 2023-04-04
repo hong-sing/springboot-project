@@ -18,9 +18,8 @@
             <br>
             <input type="hidden" id="login" name="login" th:value="${post.getLogin()}">
             <input type="hidden" id="id" name="id" th:value="${post.getId()}">
-            <!-- 수정. 삭제는 게시글 작성자만 보이게 하기(미구현) -->
-            <button type="submit" class="btn btn-bd-purple ml-auto" id="updateForm" th:if="${post.getSub()==sub}">수정하기</button>
-            <button type="submit" class="btn btn-bd-purple ml-auto" id="delete" th:if="${post.getSub()==sub}">삭제</button>
+            <button type="submit" class="btn btn-bd-purple ml-auto" id="updateForm" th:if="${post.getSub()}==sub or ${#strings.equals(role, 'ADMIN')}">수정하기</button>
+            <button type="submit" class="btn btn-bd-purple ml-auto" id="delete" th:if="${post.getSub()}==sub or ${#strings.equals(role, 'ADMIN')}">삭제</button>
         </div>
     </div>
 

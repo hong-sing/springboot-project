@@ -57,6 +57,7 @@ public class TwitchController {
         if (user != null) {
             model.addAttribute("userName", user.getName());
             model.addAttribute("sub", user.getSub());
+            model.addAttribute("role", user.getRole());
         }
         model.addAttribute("post", postsService.findById(id));
         return "meme/post-detail";

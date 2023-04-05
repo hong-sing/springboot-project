@@ -4,15 +4,17 @@
     <div class="container py-5 my-5">
         <div>
             <div class="mb-3">
+                <p>작성자</p>
                 <input type="text" class="form-control" id="author" name="author" th:value="${post.getAuthor()}" readonly>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 pt-2">
+                <p>밈</p>
                 <input type="text" class="form-control" id="meme" name="meme" th:value="${post.getMeme()}" readonly>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 pt-2">
                 <textarea id="summary" class="form-control" th:text="${post.getSummary()}" readonly></textarea>
             </div>
-            <div class="mb-3" id="description" name="description" th:utext="${post.getDescription()}">
+            <div class="mb-3 pt-5" id="description" name="description" th:utext="${post.getDescription()}">
 <!--                <p id="description" name="description" th:utext="${post.getDescription()}"></p>-->
             </div>
             <br>

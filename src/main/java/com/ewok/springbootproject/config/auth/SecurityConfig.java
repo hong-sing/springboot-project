@@ -21,7 +21,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-                .requestMatchers("/h2-consol/**").permitAll()
+                .requestMatchers("/h2-consol/**", "/profile").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/")

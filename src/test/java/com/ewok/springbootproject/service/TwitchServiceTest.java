@@ -3,8 +3,6 @@ package com.ewok.springbootproject.service;
 
 import com.ewok.springbootproject.domain.token.Token;
 import com.ewok.springbootproject.domain.token.TokenRepository;
-import com.ewok.springbootproject.service.dto.StreamInfo;
-import com.ewok.springbootproject.service.dto.StreamInfoData;
 import com.ewok.springbootproject.service.dto.Streamer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -83,4 +80,4 @@ class TwitchServiceTest {
 }
 
 
- */
+*/

@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -47,7 +46,6 @@ public class TwitchService {
         headers.setBearerAuth(accessToken);
         HttpEntity<?> entity = new HttpEntity<>(headers);
         RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<String> response = restTemplate.exchange(
         try {
             ResponseEntity<String> response = restTemplate.exchange(
                     "https://id.twitch.tv/oauth2/validate",
@@ -66,7 +64,6 @@ public class TwitchService {
                 throw new RuntimeException("Unexpected error from Twitch API", e);
             }
         }
-//        return response.getStatusCode() == HttpStatus.OK;
     }
 
     @Transactional
@@ -96,10 +93,6 @@ public class TwitchService {
         if (!isAccessTokenValid(token)) {
             token = reGetAccessToken();
         }
-
-        // 재발급 받은 토큰 update
-//        Token entity = tokenRepository.findById(1).orElseThrow(() -> new IllegalArgumentException("토큰이 없습니다"));
-//        entity.update(token);
 
         // 정보 요청
         HttpHeaders headers = new HttpHeaders();
@@ -135,8 +128,6 @@ public class TwitchService {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<LinkedHashMap> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, httpEntity, LinkedHashMap.class);
         LinkedHashMap data = response.getBody();
-//        ArrayList list = (ArrayList) data.get("data");
-//        LinkedHashMap info = (LinkedHashMap) list.get(0);
         StreamInfo streamInfo = new StreamInfo(data);
         List<StreamInfoData> infoData = streamInfoToStreamInfoData(streamInfo);
         return infoData;

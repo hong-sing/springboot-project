@@ -23,7 +23,6 @@ public class StreamInfoData {
     private final String started_at;
     private final String language;
     private final String thumbnail_url;
-//    private final String[] tag_ids;
     private final boolean is_mature;
 
     public StreamInfoData(LinkedHashMap map) {
@@ -40,7 +39,6 @@ public class StreamInfoData {
         this.started_at = (String) map.get("started_at");
         this.language = (String) map.get("language");
         this.thumbnail_url = (String) map.get("thumbnail_url");
-//        this.tag_ids = (String[]) map.get("tag_ids");
         this.is_mature = (boolean) map.get("is_mature");
     }
 }

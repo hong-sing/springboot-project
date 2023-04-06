@@ -23,14 +23,14 @@ let post = {
         let isLogin = $('#isLogin').val();
         let login = $('#streamerLogin').val();
         if (isLogin != "") {
-            window.location.href = '/post/save/' + login;
+            window.location.href = '/meme/post-save/' + login;
         } else {
             alert('로그인 후 이용해주세요');
         }
     },
     updateForm : function () {
         let id = $('#id').val();
-        window.location.href = '/post/update/' + id;
+        window.location.href = '/meme/post-update/' + id;
     },
     save : function () {
         let description = $('#summernote').summernote('code');
@@ -53,13 +53,13 @@ let post = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/v1/save',
+            url: '/api/v1/posts',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function () {
             alert('밈이 등록되었습니다.');
-            window.location.href = '/search/' + login;
+            window.location.href = '/meme/post/' + login;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -86,13 +86,13 @@ let post = {
 
         $.ajax({
             type: 'PUT',
-            url: '/api/v1/update/' + id,
+            url: '/api/v1/posts/' + id,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function () {
             alert('밈이 수정되었습니다.');
-            window.location.href = '/search/' + login;
+            window.location.href = '/meme/post/' + login;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -103,12 +103,12 @@ let post = {
 
         $.ajax({
             type: 'DELETE',
-            url: '/api/v1/delete/' + id,
+            url: '/api/v1/posts/' + id,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8'
         }).done(function () {
             alert('밈이 삭제되었습니다.');
-            window.location.href = '/search/' + login;
+            window.location.href = '/meme/post/' + login;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

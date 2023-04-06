@@ -15,7 +15,7 @@ public class PostsApiController {
 
     private final PostsService postsService;
 
-    @PostMapping("/api/v1/save")
+    @PostMapping("/api/v1/posts")
     public Long save(Model model, @RequestBody PostSaveRequestDto requestDto, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("userName", user.getName());
@@ -23,7 +23,7 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/update/{id}")
+    @PutMapping("/api/v1/posts/{id}")
     public Long update(Model model, @PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("userName", user.getName());
@@ -31,7 +31,7 @@ public class PostsApiController {
         return postsService.update(id, requestDto);
     }
 
-    @DeleteMapping("/api/v1/delete/{id}")
+    @DeleteMapping("/api/v1/posts/{id}")
     public Long delete(Model model, @PathVariable Long id, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("userName", user.getName());

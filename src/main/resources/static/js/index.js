@@ -30,9 +30,9 @@ let index = {
 
         $.ajax({
             type: 'GET',
-            url: '/search/' + streamer,
+            url: '/meme/post/' + streamer,
         }).done(function () {
-            window.location.href = '/search/' + streamer;
+            window.location.href = '/meme/post/' + streamer;
         }).fail(function (error) {
             alert('스트리머 ID를 다시 확인해주세요');
             // console.log(error);

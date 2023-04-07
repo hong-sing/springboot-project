@@ -18,9 +18,10 @@
                 </ul>
 
                 <div class="text-end">
-                    <span th:if="${userName!=null}" th:text="${userName}"></span>
-                    <a th:if="${userName==null}" type="button" class="btn btn-outline-light me-2" href="/loginForm">Login</a>
-                    <a th:unless="${userName==null}" type="button" class="btn btn-outline-light me-2" href="/logout">Logout</a>
+                    <img th:if="${user!=null}" th:src="${user.getPicture()}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    <span th:if="${user!=null}" th:text="${user.getName()}"></span>
+                    <a th:if="${user==null}" type="button" class="btn btn-outline-light me-2" href="/loginForm">Login</a>
+                    <a th:unless="${user==null}" type="button" class="btn btn-outline-light me-2" href="/logout">Logout</a>
                 </div>
             </div>
         </div>

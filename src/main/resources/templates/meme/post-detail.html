@@ -20,8 +20,10 @@
             <br>
             <input type="hidden" id="login" name="login" th:value="${post.getLogin()}">
             <input type="hidden" id="id" name="id" th:value="${post.getId()}">
-            <button type="submit" class="btn btn-bd-purple ml-auto" id="updateForm" th:if="${post.getSub()}==sub or ${#strings.equals(role, 'ADMIN')}">수정하기</button>
-            <button type="submit" class="btn btn-bd-purple ml-auto" id="delete" th:if="${post.getSub()}==sub or ${#strings.equals(role, 'ADMIN')}">삭제</button>
+            <th:block th:if="${user!=null}">
+                <button type="submit" class="btn btn-bd-purple ml-auto" id="updateForm" th:if="${post.getSub()}==${user.getSub()} or ${#strings.equals(user.getRole(), 'ADMIN')}">수정하기</button>
+                <button type="submit" class="btn btn-bd-purple ml-auto" id="delete" th:if="${post.getSub()}==${user.getSub()} or ${#strings.equals(user.getRole(), 'ADMIN')}">삭제</button>
+            </th:block>
         </div>
     </div>
 

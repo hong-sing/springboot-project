@@ -17,7 +17,7 @@
         </div>
         <div class="container">
             <div class="d-flex justify-content-end mb-3">
-                <input type="hidden" id="isLogin" th:value="${userName}">
+                <input type="hidden" id="isLogin" th:value="${user.getName()}">
                 <input type="hidden" id="streamerLogin" th:value="${streamer.getLogin()}">
                 <a type="button" class="btn btn-bd-purple ml-auto" id="saveMeme">밈 등록</a>
             </div>

@@ -19,7 +19,7 @@
             <textarea id="summernote" name="description"></textarea>
             <br>
             <input type="hidden" id="login" name="login" th:value="${login}">
-            <input type="hidden" id="sub" name="sub" th:value="${sub}">
+            <input type="hidden" id="sub" name="sub" th:value="${user.getSub()}">
             <button type="submit" class="btn btn-bd-purple ml-auto" id="write">등록</button>
         </div>
     </div>

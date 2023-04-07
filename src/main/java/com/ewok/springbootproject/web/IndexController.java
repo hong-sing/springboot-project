@@ -21,7 +21,7 @@ public class IndexController {
     public String index(Model model, @LoginUser SessionUser user) {
 
         if (user != null) {
-            model.addAttribute("userName", user.getName());
+            model.addAttribute("user", user);
         }
         model.addAttribute("streamInfoData", twitchService.getStreamInfo("ko"));
         return "index";

@@ -21,8 +21,7 @@ public class TwitchController {
     @GetMapping("/meme/post-save/{login}")
     public String postsSave(Model model, @PathVariable String login, @LoginUser SessionUser user) {
         if (user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("sub", user.getSub());
+            model.addAttribute("user", user);
         }
         model.addAttribute("login", login);
         return "meme/post-save";
@@ -31,7 +30,7 @@ public class TwitchController {
     @GetMapping("/meme/post/{streamer}")
     public String search(Model model, @PathVariable String streamer, @LoginUser SessionUser user, @PageableDefault(size = 15) Pageable pageable, @RequestParam(required = false, defaultValue = "0", value = "page") int pageNo) {
         if (user != null) {
-            model.addAttribute("userName", user.getName());
+            model.addAttribute("user", user);
         }
         model.addAttribute("streamer", twitchService.getStreamerInfo(streamer));
         model.addAttribute("posts", postsService.findByLoginGoodDesc2(streamer, pageable).getBody());
@@ -43,9 +42,7 @@ public class TwitchController {
     @GetMapping("/meme/post-detail/{id}")
     public String detail(Model model, @PathVariable Long id, @LoginUser SessionUser user) {
         if (user != null) {
-            model.addAttribute("userName", user.getName());
-            model.addAttribute("sub", user.getSub());
-            model.addAttribute("role", user.getRole());
+            model.addAttribute("user", user);
         }
         model.addAttribute("post", postsService.findById(id));
         return "meme/post-detail";
@@ -54,7 +51,7 @@ public class TwitchController {
     @GetMapping("/meme/post-update/{id}")
     public String update(Model model, @PathVariable Long id, @LoginUser SessionUser user) {
         if (user != null) {
-            model.addAttribute("userName", user.getName());
+            model.addAttribute("user", user);
         }
         model.addAttribute("post", postsService.findById(id));
         return "meme/post-update";

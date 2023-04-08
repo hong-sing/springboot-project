@@ -39,6 +39,7 @@ public class Posts extends BaseTimeEntity {
     @Column
     private String login;
 
+    @Column
     private String sub;
 
     @Builder

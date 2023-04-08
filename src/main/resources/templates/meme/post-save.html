@@ -5,7 +5,9 @@
         <div>
             <div class="mb-3">
                 <label for="meme" class="form-label">작성자</label>
-                <input type="text" class="form-control" id="author" name="author">
+                <th:block th:if="${user!=null}">
+                    <input type="text" class="form-control" id="author" name="author" th:value="${user.getName()}">
+                </th:block>
             </div>
             <div class="mb-3">
                 <label for="meme" class="form-label">밈</label>
@@ -19,7 +21,9 @@
             <textarea id="summernote" name="description"></textarea>
             <br>
             <input type="hidden" id="login" name="login" th:value="${login}">
-            <input type="hidden" id="sub" name="sub" th:value="${user.getSub()}">
+            <th:block th:if="${user!=null}">
+                <input type="hidden" id="sub" name="sub" th:value="${user.getSub()}">
+            </th:block>
             <button type="submit" class="btn btn-bd-purple ml-auto" id="write">등록</button>
         </div>
     </div>

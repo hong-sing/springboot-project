@@ -2,10 +2,14 @@ let post = {
     init : function () {
         let _this = this;
         $('#write').on('click', function () {
-            _this.save();
+            if (_this.isContent()) {
+                _this.save();
+            }
         });
         $('#update').on('click', function () {
-            _this.update();
+            if (_this.isContent()) {
+                _this.update();
+            }
         });
         $('#delete').on('click', function () {
             if (confirm('정말 삭제하시겠습니까?')) {
@@ -22,7 +26,7 @@ let post = {
     goToMemeSavePage : function () {
         let isLogin = $('#isLogin').val();
         let login = $('#streamerLogin').val();
-        if (isLogin != "") {
+        if (isLogin != "" && isLogin != null) {
             window.location.href = '/meme/post-save/' + login;
         } else {
             alert('로그인 후 이용해주세요');
@@ -112,6 +116,25 @@ let post = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+    isContent : function () {
+        let author = $('#author').val();
+        let meme = $('#meme').val();
+        let summary = $('#summary').val();
+
+        if (author == null || author == '') {
+            alert('작성자를 입력해주세요');
+            return false;
+        }
+        if (meme == null || meme == '') {
+            alert('밈을 입력해주세요');
+            return false;
+        }
+        if (summary == null || summary == '') {
+            alert('간단한 설명을 입력해주세요');
+            return false;
+        }
+        return true;
     }
 }
 
